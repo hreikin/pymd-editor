@@ -1,11 +1,9 @@
 from editor import editor
 
-# from tkinter import *
 import tkinter as tk
 from tkinter import font
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
-# from ttkbootstrap import Notebook
 
 import logging
 
@@ -97,12 +95,9 @@ class PyMarkdownEditor(ttk.Frame):
 
 
             
-# Instantiate the root window, set the screen size and instantiate the PDF 
-# Toolbox window before running the main loop.
+# Instantiate the root window, set the screen size, theme and title and then 
+# instantiate the PyMarkdownEditor window before running the main loop.
 if __name__ == "__main__":
-    # root = ttk.Tk()
-    # style = ttk.Style("darkly")
-    # root = ttk.Window()
     root = ttk.Window(themename="darkly")
     root.title("PDF Toolbox")
     screen_height = root.winfo_screenheight()
