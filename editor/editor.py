@@ -1,9 +1,8 @@
 from utils import constants
 
 from pathlib import Path
-# from tkinter import *
 import tkinter as tk
-from tkinter import font, filedialog, simpledialog
+from tkinter import filedialog, simpledialog
 from tkinter import messagebox as mbox
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
@@ -18,7 +17,7 @@ from pygments.styles import get_style_by_name
 
 class Editor(ttk.Frame):
     def __init__(self, master, **kwargs):
-        """Two Text widgets and a Scrollbar in a Frame."""
+        """A Markdown editor with HTML Preview window."""
         ttk.Frame.__init__(self, master) # no need for super
 
         # Toolbar.
