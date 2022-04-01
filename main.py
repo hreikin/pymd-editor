@@ -42,10 +42,6 @@ class PyMarkdownEditor(ttk.Frame):
 
     def init_window(self):
         """Construct the layout."""
-        # Create the editor/preview frame
-        self.editor = editor.Editor(self.master)
-        self.editor.pack(fill="both", expand=1)
-
         # Create main menu layout.
         self.main_menu = ttk.Menu(self)
         self.file_menu = ttk.Menu(self.main_menu)
@@ -69,32 +65,14 @@ class PyMarkdownEditor(ttk.Frame):
         self.edit_menu.add_command(label="Select All", command=self.editor.select_all, accelerator="Ctrl+A")
         self.main_menu.add_cascade(label="Edit", menu=self.edit_menu)
 
-        # Create right click menu layout for the editor.
-        self.right_click = ttk.Menu(self.editor.text_area)
-        self.right_click.add_command(label="Copy", command=lambda: self.focus_get().event_generate("<<Copy>>"), accelerator="Ctrl+C")
-        self.right_click.add_command(label="Cut", command=lambda: self.focus_get().event_generate("<<Cut>>"), accelerator="Ctrl+X")
-        self.right_click.add_command(label="Paste", command=lambda: self.focus_get().event_generate("<<Paste>>"), accelerator="Ctrl+V")
-        self.right_click.add_separator()
-        self.right_click.add_command(label="Undo", command=lambda: self.focus_get().event_generate("<<Undo>>"), accelerator="Ctrl+Z")
-        self.right_click.add_command(label="Redo", command=lambda: self.focus_get().event_generate("<<Redo>>"), accelerator="Ctrl+Y")
-        self.right_click.add_separator()
-        self.right_click.add_command(label="Find", command=self.editor.find, accelerator="Ctrl+F")
-        self.right_click.add_command(label="Select All", command=self.editor.select_all, accelerator="Ctrl+A")
-
-        # Bind mouse/key events to functions.
-        self.editor.text_area.bind_all("<Control-f>", self.editor.find)
-        self.editor.text_area.bind_all("<Control-a>", self.editor.select_all)
-        self.editor.text_area.bind("<Button-3>", self.popup)
-
         # Configure the menus.
         self.master.config(menu=self.main_menu)
 
-    def popup(self, event):
-        """Right-click popup at mouse location."""
-        self.right_click.post(event.x_root, event.y_root)
+        # Create the editor/preview frame
+        self.editor = editor.Editor(self.master)
+        self.editor.pack(fill="both", expand=1)
 
 
-            
 # Instantiate the root window, set the screen size, theme and title and then 
 # instantiate the PyMarkdownEditor window before running the main loop.
 if __name__ == "__main__":
