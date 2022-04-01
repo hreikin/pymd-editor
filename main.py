@@ -1,4 +1,4 @@
-from editor import editor
+from editor_frame.editor_frame import EditorFrame
 
 import tkinter as tk
 import ttkbootstrap as ttk
@@ -41,7 +41,7 @@ class PyMarkdownEditor(ttk.Frame):
     def init_window(self):
         """Construct the layout."""
         # Create the editor/preview frame
-        self.editor = editor.Editor(self.master)
+        self.editor = EditorFrame(self.master)
         self.editor.pack(fill="both", expand=1)
 
         # Create main menu layout.
@@ -75,7 +75,7 @@ class PyMarkdownEditor(ttk.Frame):
 # instantiate the PyMarkdownEditor window before running the main loop.
 if __name__ == "__main__":
     root = ttk.Window(themename="darkly")
-    root.title("PDF Toolbox")
+    root.title("Py Markdown Editor")
     screen_height = root.winfo_screenheight()
     screen_width = root.winfo_screenwidth()
     root.geometry(f"{screen_width}x{screen_height}")
