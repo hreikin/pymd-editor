@@ -1,7 +1,6 @@
 from editor import editor
 
 import tkinter as tk
-from tkinter import font
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 
@@ -37,11 +36,14 @@ class PyMarkdownEditor(ttk.Frame):
         the variables."""
         ttk.Frame.__init__(self, master)
         self.master = master
-        self.myfont = font.Font(family="Ubuntu", size=16)
         self.init_window()
 
     def init_window(self):
         """Construct the layout."""
+        # Create the editor/preview frame
+        self.editor = editor.Editor(self.master)
+        self.editor.pack(fill="both", expand=1)
+
         # Create main menu layout.
         self.main_menu = ttk.Menu(self)
         self.file_menu = ttk.Menu(self.main_menu)
@@ -67,10 +69,6 @@ class PyMarkdownEditor(ttk.Frame):
 
         # Configure the menus.
         self.master.config(menu=self.main_menu)
-
-        # Create the editor/preview frame
-        self.editor = editor.Editor(self.master)
-        self.editor.pack(fill="both", expand=1)
 
 
 # Instantiate the root window, set the screen size, theme and title and then 
