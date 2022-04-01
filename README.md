@@ -62,7 +62,7 @@
         <li><a href="#usage">Usage</a></li>
       </ul>
     </li>
-    <!-- <li><a href="#roadmap">Roadmap</a></li> -->
+    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -124,7 +124,7 @@ To get a local copy up and running follow these simple example steps.
 To start the editor simply run the following:
 
 ```sh
-python3 main.py
+python3 -m pymd_editor
 ```
 
 <!-- _For more examples, please refer to the [Documentation](https://example.com)_ -->
@@ -132,16 +132,16 @@ python3 main.py
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- ROADMAP -->
-<!-- ## Roadmap
+## Roadmap
 
-- [ ] Feature 1
+<!-- - [ ] Feature 1
 - [ ] Feature 2
 - [ ] Feature 3
-    - [ ] Nested Feature
+    - [ ] Nested Feature -->
 
 See the [open issues](https://github.com/hreikin/pymd-editor/issues) for a full list of proposed features (and known issues).
 
-<p align="right">(<a href="#top">back to top</a>)</p> -->
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
 ## Contributing
