@@ -1,4 +1,4 @@
-from utils import constants
+import py_markdown_editor_constants as constants
 
 from pathlib import Path
 import tkinter as tk

@@ -1,34 +1,8 @@
-from editor_frame.editor_frame import EditorFrame
+from py_markdown_editor_frame import EditorFrame
 
 import tkinter as tk
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
-
-import logging
-
-##################################### LOGS #####################################
-# Initialize the logger and specify the level of logging. This will log "DEBUG" 
-# and higher messages to file and log "INFO" and higher messages to the console.
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(levelname)s: %(message)s',
-                    datefmt='%d-%m-%y %H:%M:%S',
-                    filename='debug.log',
-                    filemode='w')
-
-# Define a "handler" which writes "INFO" messages or higher to the "sys.stderr".
-console = logging.StreamHandler()
-console.setLevel(logging.INFO)
-
-# Set a format which is simpler for console messages.
-formatter = logging.Formatter('[%(asctime)s]: %(message)s', datefmt='%H:%M:%S')
-
-# Tell the console "handler" to use this format.
-console.setFormatter(formatter)
-
-# Add the "handler" to the "root logger".
-logging.getLogger('').addHandler(console)
-
-################################################################################
 
 class PyMarkdownEditor(ttk.Frame):
     def __init__(self, master=None):
