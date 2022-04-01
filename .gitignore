@@ -137,16 +137,3 @@ cython_debug/
 
 # Created files
 *.data
-
-# local folders and files from building/converting
-confidence/
-converted/
-extracted/
-json/
-pdfs/
-sqlite/
-zips/
-test/
-pdfservices-api-credentials.json
-private.key
-pdf-urls.*
