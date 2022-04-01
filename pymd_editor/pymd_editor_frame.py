@@ -21,7 +21,7 @@ class EditorFrame(ttk.Frame):
         A Markdown editor with HTML Preview window in a ttkbootstrap frame. 
         Import it into your own scripts like so:
         
-            from py_markdown_editor.py_markdown_editor_frame import EditorFrame
+            from pymd_editor.pymd_editor_frame import EditorFrame
 
             import tkinter as tk
             import ttkbootstrap as ttk
