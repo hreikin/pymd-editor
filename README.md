@@ -60,7 +60,13 @@
       <ul>
         <!-- <li><a href="#prerequisites">Prerequisites</a></li> -->
         <li><a href="#installation">Installation</a></li>
-        <li><a href="#usage">Usage</a></li>
+        <li>
+          <a href="#usage">Usage</a>
+          <ul>
+            <li><a href="standalone">Standalone</a></li>
+            <li><a href="embedded">Embedded</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#roadmap">Roadmap</a></li>
@@ -123,10 +129,43 @@ To get a local copy up and running follow these simple example steps.
 <!-- USAGE EXAMPLES -->
 ### Usage
 
-To start the editor simply run the following:
+#### Standalone
+
+To start the standalone editor simply run the following:
 
 ```sh
 python3 -m pymd_editor
+```
+
+#### Embedded
+
+To use the `ttkbootstrap` styled `pymd_editor_frame` in one of your own python scripts:
+
+```python
+from pymd_editor.pymd_editor_frame import EditorFrame
+
+import tkinter as tk
+import ttkbootstrap as ttk
+from ttkbootstrap.constants import *
+
+root = ttk.Window(themename="darkly")
+app = EditorFrame(root)
+app.pack(fill="both", expand=1)
+app.mainloop()
+```
+
+To use the plain `tkinter` styled `tkinter_markdown_editor_frame` in one of your own python scripts:
+
+```python
+from py_markdown_editor.tkinter_markdown_editor_frame import TkEditorFrame
+
+import tkinter as tk
+from tkinter.constants import *
+
+root = tk.Tk()
+app = TkEditorFrame(root)
+app.pack(fill="both", expand=1)
+app.mainloop()
 ```
 
 <!-- _For more examples, please refer to the [Documentation](https://example.com)_ -->
