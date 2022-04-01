@@ -63,8 +63,8 @@
         <li>
           <a href="#usage">Usage</a>
           <ul>
-            <li><a href="standalone">Standalone</a></li>
-            <li><a href="embedded">Embedded</a></li>
+            <li><a href="#standalone">Standalone</a></li>
+            <li><a href="#embedded">Embedded</a></li>
           </ul>
         </li>
       </ul>
