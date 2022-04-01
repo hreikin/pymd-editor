@@ -52,10 +52,30 @@ class Editor(ttk.Frame):
         self.check_markdown(start="1.0", end=END)
         self.text_area.bind("<<Modified>>", self.on_input_change)
 
+        # Create right click menu layout for the editor.
+        self.right_click = ttk.Menu(self.text_area)
+        self.right_click.add_command(label="Copy", command=lambda: self.focus_get().event_generate("<<Copy>>"), accelerator="Ctrl+C")
+        self.right_click.add_command(label="Cut", command=lambda: self.focus_get().event_generate("<<Cut>>"), accelerator="Ctrl+X")
+        self.right_click.add_command(label="Paste", command=lambda: self.focus_get().event_generate("<<Paste>>"), accelerator="Ctrl+V")
+        self.right_click.add_separator()
+        self.right_click.add_command(label="Undo", command=lambda: self.focus_get().event_generate("<<Undo>>"), accelerator="Ctrl+Z")
+        self.right_click.add_command(label="Redo", command=lambda: self.focus_get().event_generate("<<Redo>>"), accelerator="Ctrl+Y")
+        self.right_click.add_separator()
+        self.right_click.add_command(label="Find", command=self.find, accelerator="Ctrl+F")
+        self.right_click.add_command(label="Select All", command=self.select_all, accelerator="Ctrl+A")
+
+        # Bind mouse/key events to functions.
+        self.text_area.bind_all("<Control-f>", self.find)
+        self.text_area.bind_all("<Control-a>", self.select_all)
+        self.text_area.bind("<Button-3>", self.popup)
 
         # # This links the scrollbars but is currently causing issues. 
         # Changing the settings to make the scrolling work
         # self.preview_area.html['yscrollcommand'] = self.on_mousewheel
+
+    def popup(self, event):
+        """Right-click popup at mouse location."""
+        self.right_click.post(event.x_root, event.y_root)
 
     def on_scrollbar(self, *args):
         '''Scrolls both text widgets when the scrollbar is moved'''
@@ -134,7 +154,7 @@ class Editor(ttk.Frame):
         html = md2html.convert(markdownText)
         self.preview_area.load_html(html)
         self.preview_area.add_css("body {background-color: #272822; color: white;}")
-        self.check_markdown()
+        self.check_markdown(start="1.0", end=END)
         self.text_area.edit_modified(0)
 
     def load_style(self, stylename):
