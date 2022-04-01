@@ -1,4 +1,4 @@
-import py_markdown_editor_constants as constants
+import pymd_editor.pymd_editor_constants as constants
 
 from pathlib import Path
 import tkinter as tk
@@ -17,34 +17,46 @@ from pygments.styles import get_style_by_name
 
 class EditorFrame(ttk.Frame):
     def __init__(self, master, **kwargs):
-        """A Markdown editor with HTML Preview window."""
+        """
+        A Markdown editor with HTML Preview window in a ttkbootstrap frame. 
+        Import it into your own scripts like so:
+        
+            from py_markdown_editor.py_markdown_editor_frame import EditorFrame
+
+            import tkinter as tk
+            import ttkbootstrap as ttk
+            from ttkbootstrap.constants import *
+
+            root = ttk.Window(themename="darkly")
+            app = EditorFrame(root)
+            app.pack(fill="both", expand=1)
+            app.mainloop()
+        
+        """
         ttk.Frame.__init__(self, master) # no need for super
 
         # Toolbar.
-        self.top_bar = ttk.Frame(self)
-        self.open_btn = ttk.Button(self.top_bar, text="Open")
+        self.top_bar = ttk.Frame(self.master)
+        self.open_btn = ttk.Button(self.top_bar, text="Open", command=self.open_md_file)
         self.open_btn.pack(side="left", padx=0, pady=0)
-        self.save_as_btn = ttk.Button(self.top_bar, text="Save As")
+        self.save_as_btn = ttk.Button(self.top_bar, text="Save As", command=self.save_as_md_file)
         self.save_as_btn.pack(side="left", padx=0, pady=0)
-        self.save_btn = ttk.Button(self.top_bar, text="Save")
+        self.save_btn = ttk.Button(self.top_bar, text="Save", command=self.save_md_file)
         self.save_btn.pack(side="left", padx=0, pady=0)
         self.top_bar.pack(side="top", fill="x")
 
         # Creating the widgets
-        self.text_area = ttk.Text(self, state="normal", wrap="none", pady=2, padx=3, undo=True, width=100, height=25, yscrollcommand=self.on_mousewheel)
+        self.text_area = ttk.Text(self.master, state="normal", wrap="none", pady=2, padx=3, undo=True, width=100, height=25, yscrollcommand=self.on_mousewheel)
         self.text_area.pack(side="left", fill="both", expand=1)
-        self.scrollbar = ttk.Scrollbar(self, command=self.on_scrollbar)
+        self.scrollbar = ttk.Scrollbar(self.master, command=self.on_scrollbar)
         self.scrollbar.pack(side="left", fill="y")
-        self.preview_area = HtmlFrame(self)
+        self.preview_area = HtmlFrame(self.master)
         self.preview_area.pack(side="right", fill="both", expand=1)
         # Set Pygments syntax highlighting style.
         self.lexer = Lexer()
         self.syntax_highlighting_tags = self.load_style("monokai")
-        # Open default file. This needs changing to only show the default on the 
-        # first run or update, normally it should load the file that was open 
-        # last time the program was running.
-        with open(constants.cur_file, "r") as stream:
-            default_text = stream.read()
+        # Default markdown string.
+        default_text = constants.default_md_string
         self.text_area.insert(0.0, default_text)
         # Applies markdown formatting to default file.
         self.check_markdown(start="1.0", end=END)
@@ -113,7 +125,7 @@ class EditorFrame(ttk.Frame):
 
     def open_md_file(self):
         """Open a file and clear/insert the text into the text_area."""
-        open_filename_md = filedialog.askopenfilename(filetypes=(("Markdown File", "*.md , *.mdown , *.markdown"), ("Text File", "*.txt"), ("All Files", "*.*")), initialdir=constants.src_dir)
+        open_filename_md = filedialog.askopenfilename(filetypes=(("Markdown File", "*.md , *.mdown , *.markdown"), ("Text File", "*.txt"), ("All Files", "*.*")))
         if open_filename_md:
             try:
                 with open(open_filename_md, "r") as stream:
@@ -133,6 +145,7 @@ class EditorFrame(ttk.Frame):
             try:
                 with open(self.save_filename_md, "w") as stream:
                     stream.write(self.file_data)
+                    constants.cur_file = Path(self.save_filename_md)
             except:
                 mbox.showerror(title="Error", message=f"Error Saving File\n\nThe file: {self.save_filename_md} can not be saved!")
 

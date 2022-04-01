@@ -1,3 +1,10 @@
+from pathlib import Path
+
+# This is the only variable to be changed from elsewhere. All the rest should 
+# remain constant.
+cur_file = Path()
+
+default_md_string = """
 # Heading 1
 ## Heading 2
 ### Heading 3
@@ -67,4 +74,4 @@ Here is an `inline` code block.
 ```
 This is a fenced code block.
 ```
-
+"""
