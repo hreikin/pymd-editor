@@ -106,6 +106,7 @@ To get a local copy up and running follow these simple example steps.
 1. Clone the repo:
    ```sh
    git clone https://github.com/hreikin/pymd-editor.git
+   cd pymd-editor/
    ```
 2. Create and source a Python virtual environment:
    ```sh
