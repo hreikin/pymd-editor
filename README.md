@@ -29,10 +29,10 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a> -->
 
-<h3 align="center">Py Markdown Editor</h3>
+<h3 align="center">PyMD Editor</h3>
 
   <p align="center">
-    A Python based Markdown editor with HTML Preview
+    A standalone and embeddable Python based Markdown editor with HTML preview.
     <br />
     <!-- <a href="https://github.com/hreikin/pymd-editor"><strong>Explore the docs »</strong></a>
     <br />
@@ -76,7 +76,7 @@
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-A Python based Markdown editor with HTML preview.
+A standalone and embeddable Python based Markdown editor with HTML preview.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
