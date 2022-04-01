@@ -15,7 +15,7 @@ from pygments.token import Generic
 from pygments.lexer import bygroups
 from pygments.styles import get_style_by_name
 
-class Editor(ttk.Frame):
+class EditorFrame(ttk.Frame):
     def __init__(self, master, **kwargs):
         """A Markdown editor with HTML Preview window."""
         ttk.Frame.__init__(self, master) # no need for super
@@ -37,7 +37,6 @@ class Editor(ttk.Frame):
         self.scrollbar.pack(side="left", fill="y")
         self.preview_area = HtmlFrame(self)
         self.preview_area.pack(side="right", fill="both", expand=1)
-        self.text_area.focus_set()
         # Set Pygments syntax highlighting style.
         self.lexer = Lexer()
         self.syntax_highlighting_tags = self.load_style("monokai")
@@ -49,7 +48,7 @@ class Editor(ttk.Frame):
         self.text_area.insert(0.0, default_text)
         # Applies markdown formatting to default file.
         self.check_markdown(start="1.0", end=END)
-        self.text_area.bind("<<Modified>>", self.on_input_change)
+        self.text_area.focus_set()
 
         # Create right click menu layout for the editor.
         self.right_click = ttk.Menu(self.text_area)
@@ -64,6 +63,7 @@ class Editor(ttk.Frame):
         self.right_click.add_command(label="Select All", command=self.select_all, accelerator="Ctrl+A")
 
         # Bind mouse/key events to functions.
+        self.text_area.bind("<<Modified>>", self.on_input_change)
         self.text_area.bind_all("<Control-f>", self.find)
         self.text_area.bind_all("<Control-a>", self.select_all)
         self.text_area.bind("<Button-3>", self.popup)
