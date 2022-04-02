@@ -39,7 +39,7 @@ jobs:
         user: __token__
         password: ${{ secrets.PYPI_TOKEN }}
     - name: Create Release
-    - uses: "marvinpinto/action-automatic-releases@latest"
+    - uses: marvinpinto/action-automatic-releases@latest
       with:
         repo_token: "${{ secrets.GH_WORKFLOW_TOKEN }}"
         prerelease: True
