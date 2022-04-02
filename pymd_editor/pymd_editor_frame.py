@@ -68,8 +68,9 @@ class EditorFrame(ttk.Frame):
         self.bold_icon = ttk.PhotoImage(file="pymd_editor/icons/round_format_bold_black_24dp.png")
         self.bold_btn = ttk.Button(self.top_bar, text="Bold", command=self.bold, image=self.bold_icon)
         self.bold_btn.pack(side="left", padx=0, pady=0)
-        # self.italic_btn = ttk.Button(self.top_bar, text="Italic")
-        # self.italic_btn.pack(side="left", padx=0, pady=0)
+        self.italic_icon = ttk.PhotoImage(file="pymd_editor/icons/round_format_italic_black_24dp.png")
+        self.italic_btn = ttk.Button(self.top_bar, text="Italic", command=self.italic, image=self.italic_icon)
+        self.italic_btn.pack(side="left", padx=0, pady=0)
         # self.bold_italic_btn = ttk.Button(self.top_bar, text="Bold Italic")
         # self.bold_italic_btn.pack(side="left", padx=0, pady=0)
         # self.heading_btn = ttk.Button(self.top_bar, text="Heading")
@@ -275,6 +276,22 @@ class EditorFrame(ttk.Frame):
                 self.bold_selection = f"**{self.cur_selection}**"
                 self.text_area.delete(index1=SEL_FIRST, index2=SEL_LAST)
                 self.text_area.insert(INSERT, self.bold_selection)
+        except:
+            # self.text_area.insert(INSERT, "****")
+            pass
+
+
+    def italic(self):
+        try:
+            self.cur_selection = self.text_area.selection_get()
+            if "*" in str(self.cur_selection):
+                self.unitalic_selection = str(self.cur_selection).replace("*", "")
+                self.text_area.delete(index1=SEL_FIRST, index2=SEL_LAST)
+                self.text_area.insert(INSERT, self.unitalic_selection)
+            else:
+                self.italic_selection = f"*{self.cur_selection}*"
+                self.text_area.delete(index1=SEL_FIRST, index2=SEL_LAST)
+                self.text_area.insert(INSERT, self.italic_selection)
         except:
             # self.text_area.insert(INSERT, "****")
             pass
