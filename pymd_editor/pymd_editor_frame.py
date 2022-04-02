@@ -55,8 +55,8 @@ class EditorFrame(ttk.Frame):
         self.paste_btn.pack(side="left", padx=0, pady=0)
         self.find_btn = ttk.Button(self.top_bar, text="Find", command=self.find)
         self.find_btn.pack(side="left", padx=0, pady=0)
-        # self.bold_btn = ttk.Button(self.top_bar, text="Bold", command=self.bold)
-        # self.bold_btn.pack(side="left", padx=0, pady=0)
+        self.bold_btn = ttk.Button(self.top_bar, text="Bold", command=self.bold)
+        self.bold_btn.pack(side="left", padx=0, pady=0)
         # self.italic_btn = ttk.Button(self.top_bar, text="Italic")
         # self.italic_btn.pack(side="left", padx=0, pady=0)
         # self.bold_italic_btn = ttk.Button(self.top_bar, text="Bold Italic")
@@ -253,16 +253,20 @@ class EditorFrame(ttk.Frame):
                 self.text_area.tag_add(str(t), "range_start", "range_end")
             self.text_area.mark_set("range_start", "range_end")
 
-    # def bold(self):
-    #     try:
-    #         self.cur_selection = self.text_area.selection_get()
-    #         print(self.cur_selection)
-    #         self.bold_selection = f"**{self.cur_selection}**"
-    #         self.text_area.delete(index1=SEL_FIRST, index2=SEL_LAST)
-    #         self.text_area.insert(INSERT, self.bold_selection)
-    #     except:
-    #         # self.text_area.insert(INSERT, "****")
-    #         pass
+    def bold(self):
+        try:
+            self.cur_selection = self.text_area.selection_get()
+            if "**" in str(self.cur_selection):
+                self.unbold_selection = str(self.cur_selection).replace("**", "")
+                self.text_area.delete(index1=SEL_FIRST, index2=SEL_LAST)
+                self.text_area.insert(INSERT, self.unbold_selection)
+            else:
+                self.bold_selection = f"**{self.cur_selection}**"
+                self.text_area.delete(index1=SEL_FIRST, index2=SEL_LAST)
+                self.text_area.insert(INSERT, self.bold_selection)
+        except:
+            # self.text_area.insert(INSERT, "****")
+            pass
 
 class Lexer(MarkdownLexer):
     """Extend MarkdownLexer to add markup for bold-italic. This needs extending 
