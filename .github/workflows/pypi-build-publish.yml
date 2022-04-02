@@ -42,5 +42,5 @@ jobs:
           prerelease: True
           files: |
             LICENSE.txt
-            *.tar.gz
-            *.whl
+            dist/*.tar.gz
+            dist/*.whl
