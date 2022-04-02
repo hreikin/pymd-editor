@@ -38,7 +38,7 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/hreikin/pymd-editor
       name: PyMD Editor @ Github
-copyright: Copyright &copy; 2022 hreikin
+copyright: MIT License
 markdown_extensions:
 
   # Python Markdown
