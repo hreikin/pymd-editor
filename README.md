@@ -176,20 +176,6 @@ app.pack(fill="both", expand=1)
 app.mainloop()
 ```
 
-To use the plain `tkinter` styled `tkinter_markdown_editor_frame` in one of your own python scripts:
-
-```python
-from pymd_editor.tkinter_markdown_editor_frame import TkEditorFrame
-
-import tkinter as tk
-from tkinter.constants import *
-
-root = tk.Tk()
-app = TkEditorFrame(root)
-app.pack(fill="both", expand=1)
-app.mainloop()
-```
-
 <!-- _For more examples, please refer to the [Documentation](https://example.com)_ -->
 
 <p align="right">(<a href="#top">back to top</a>)</p>
