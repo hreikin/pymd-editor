@@ -1,1 +1,1 @@
-include py_markdown_editor/*.md
+include *.md
