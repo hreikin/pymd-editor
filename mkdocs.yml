@@ -1,4 +1,5 @@
 site_name: PyMD Editor Docs
+site_url: https://hreikin.github.io/pymd-editor
 repo_name: hreikin/pymd-editor
 repo_url: https://github.com/hreikin/pymd-editor
 theme:
