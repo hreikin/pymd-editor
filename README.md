@@ -34,8 +34,8 @@
   <p align="center">
     A standalone and embeddable Python based Markdown editor with HTML preview.
     <br />
-    <!-- <a href="https://github.com/hreikin/pymd-editor"><strong>Explore the docs »</strong></a>
-    <br />
+    <a href="https://hreikin.github.io/pymd-editor/"><strong>Explore the docs »</strong></a>
+    <!-- <br />
     <br />
     <a href="https://github.com/hreikin/pymd-editor">View Demo</a>
     · -->
@@ -220,6 +220,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Github Link: [https://github.com/hreikin/pymd-editor](https://github.com/hreikin/pymd-editor)  
 PyPi Link: [https://pypi.org/project/pymd-editor/](https://pypi.org/project/pymd-editor/)  
+Documentation: [https://hreikin.github.io/pymd-editor/](https://hreikin.github.io/pymd-editor/)  
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

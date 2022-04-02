@@ -7,6 +7,10 @@
 
 A standalone and embeddable Python based Markdown editor with HTML preview.
 
+- Github Link: [https://github.com/hreikin/pymd-editor](https://github.com/hreikin/pymd-editor)  
+- PyPi Link: [https://pypi.org/project/pymd-editor/](https://pypi.org/project/pymd-editor/)  
+- Documentation: [https://hreikin.github.io/pymd-editor/](https://hreikin.github.io/pymd-editor/)  
+
 ### Built With
 
 * [Python](https://www.python.org/)
