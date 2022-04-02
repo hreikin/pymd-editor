@@ -59,7 +59,13 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <!-- <li><a href="#prerequisites">Prerequisites</a></li> -->
-        <li><a href="#installation">Installation</a></li>
+        <li>
+          <a href="#installation">Installation</a>
+          <ul>
+            <li><a href="#install-with-pip">Install With PIP</a></li>
+            <li><a href="#install-from-source">Install From Source</a></li>
+          </ul>
+        </li>
         <li>
           <a href="#usage">Usage</a>
           <ul>
@@ -107,7 +113,19 @@ This is an example of how to list things you need to use the software and how to
   ``` -->
 
 ### Installation
-To get a local copy up and running follow these simple example steps.
+To get a local copy up and running choose one of the below install instructions and follow the steps provided.
+
+#### Install With PIP
+
+The simplest way to install the PyMD Editor is to use `pip`:
+
+```sh
+pip install pymd-editor
+```
+
+#### Install From Source
+
+Alternatively you can install from source by following the steps below:
 
 1. Clone the repo:
    ```sh
