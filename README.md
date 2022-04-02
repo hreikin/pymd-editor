@@ -137,6 +137,8 @@ To start the standalone editor simply run the following:
 python3 -m pymd_editor
 ```
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 #### Embedded
 
 To use the `ttkbootstrap` styled `pymd_editor_frame` in one of your own python scripts:
