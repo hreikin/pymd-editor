@@ -46,12 +46,17 @@ class EditorFrame(ttk.Frame):
         self.top_bar.pack(side="top", fill="x")
 
         # Creating the widgets
-        self.text_area = ttk.Text(self.master, state="normal", wrap="none", pady=2, padx=3, undo=True, width=100, height=25, yscrollcommand=self.on_mousewheel)
+        self.editor_pw = ttk.Panedwindow(self.master, orient="horizontal")
+        self.editor_frame = ttk.Frame(self.editor_pw)
+        self.text_area = ttk.Text(self.editor_frame, state="normal", wrap="none", pady=2, padx=3, undo=True, width=100, height=25, yscrollcommand=self.on_mousewheel)
         self.text_area.pack(side="left", fill="both", expand=1)
-        self.scrollbar = ttk.Scrollbar(self.master, command=self.on_scrollbar)
+        self.scrollbar = ttk.Scrollbar(self.editor_frame, command=self.on_scrollbar)
         self.scrollbar.pack(side="left", fill="y")
-        self.preview_area = HtmlFrame(self.master)
-        self.preview_area.pack(side="right", fill="both", expand=1)
+        self.preview_area = HtmlFrame(self.editor_pw)
+        self.editor_pw.add(self.editor_frame)
+        self.editor_pw.add(self.preview_area)
+        self.editor_pw.pack(side="left", fill="both", expand=1)
+
         # Set Pygments syntax highlighting style.
         self.lexer = Lexer()
         self.syntax_highlighting_tags = self.load_style("monokai")
