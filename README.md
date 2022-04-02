@@ -177,7 +177,7 @@ app.mainloop()
 To use the plain `tkinter` styled `tkinter_markdown_editor_frame` in one of your own python scripts:
 
 ```python
-from py_markdown_editor.tkinter_markdown_editor_frame import TkEditorFrame
+from pymd_editor.tkinter_markdown_editor_frame import TkEditorFrame
 
 import tkinter as tk
 from tkinter.constants import *
