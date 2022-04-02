@@ -39,6 +39,8 @@
     <br />
     <a href="https://github.com/hreikin/pymd-editor">View Demo</a>
     · -->
+    <a href="https://pypi.org/project/pymd-editor/">PyPi</a>
+    ·
     <a href="https://github.com/hreikin/pymd-editor/issues">Report Bug</a>
     ·
     <a href="https://github.com/hreikin/pymd-editor/issues">Request Feature</a>
@@ -230,7 +232,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Project Link: [https://github.com/hreikin/pymd-editor](https://github.com/hreikin/pymd-editor)
+Github Link: [https://github.com/hreikin/pymd-editor](https://github.com/hreikin/pymd-editor)  
+PyPi Link: [https://pypi.org/project/pymd-editor/](https://pypi.org/project/pymd-editor/)  
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
