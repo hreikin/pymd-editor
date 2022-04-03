@@ -66,10 +66,10 @@ class EditorFrame(ttk.Frame):
         self.find_btn = ttk.Button(self.top_bar, text="Find", command=self.find, image=self.find_icon)
         self.find_btn.pack(side="left", padx=0, pady=0)
         self.bold_icon = ttk.PhotoImage(file="pymd_editor/icons/round_format_bold_black_24dp.png")
-        self.bold_btn = ttk.Button(self.top_bar, text="Bold", command=self.bold, image=self.bold_icon)
+        self.bold_btn = ttk.Button(self.top_bar, text="Bold", command=lambda: self.apply_markdown_both_sides(constants.bold_md_syntax, constants.bold_md_ignore), image=self.bold_icon)
         self.bold_btn.pack(side="left", padx=0, pady=0)
         self.italic_icon = ttk.PhotoImage(file="pymd_editor/icons/round_format_italic_black_24dp.png")
-        self.italic_btn = ttk.Button(self.top_bar, text="Italic", command=self.italic, image=self.italic_icon)
+        self.italic_btn = ttk.Button(self.top_bar, text="Italic", command=lambda: self.apply_markdown_both_sides(constants.italic_md_syntax, constants.italic_md_ignore), image=self.italic_icon)
         self.italic_btn.pack(side="left", padx=0, pady=0)
         # self.bold_italic_btn = ttk.Button(self.top_bar, text="Bold Italic")
         # self.bold_italic_btn.pack(side="left", padx=0, pady=0)
@@ -93,12 +93,12 @@ class EditorFrame(ttk.Frame):
         # self.link_btn.pack(side="left", padx=0, pady=0)
         # self.image_btn = ttk.Button(self.top_bar, text="Image")
         # self.image_btn.pack(side="left", padx=0, pady=0)
-        self.style_opt_btn = tk.Menubutton(self.top_bar, text='Style =', relief='raised')
+        self.style_opt_btn = ttk.Menubutton(self.top_bar, text="Editor Style")
         self.style_opt_btn.pack(side="left", padx=0, pady=0)
-        self.style_opt_menu = tk.Menu(self.style_opt_btn, tearoff=False)
-        self.style_opt_menu.add_command(label='Light', command=lambda: self.load_style('stata'))
-        self.style_opt_menu.add_command(label='Dark', command=lambda: self.load_style('stata-dark'))
-        self.style_opt_btn['menu'] = self.style_opt_menu
+        self.style_opt_menu = ttk.Menu(self.style_opt_btn, tearoff=False)
+        self.style_opt_menu.add_command(label="monokai", command=lambda: self.load_style("monokai"))
+        self.style_opt_menu.add_command(label="stata-dark", command=lambda: self.load_style("stata-dark"))
+        self.style_opt_btn["menu"] = self.style_opt_menu
         self.top_bar.pack(side="top", fill="x")
 
         # Creating the widgets
@@ -115,7 +115,7 @@ class EditorFrame(ttk.Frame):
 
         # Set Pygments syntax highlighting style.
         self.lexer = Lexer()
-        self.syntax_highlighting_tags = self.load_style("monokai")
+        self.syntax_highlighting_tags = self.load_style("stata-dark")
         # Default markdown string.
         default_text = constants.default_md_string
         self.text_area.insert(0.0, default_text)
@@ -277,37 +277,50 @@ class EditorFrame(ttk.Frame):
                 self.text_area.tag_add(str(t), "range_start", "range_end")
             self.text_area.mark_set("range_start", "range_end")
 
-    def bold(self):
+    def apply_markdown_both_sides(self, md_syntax, md_ignore):
+        """
+        A generic, catch-all attempt to apply and remove markdown from either 
+        side of a selection.
+
+        :param md_syntax: Tuple of markdown strings to apply/remove.
+        :param md_ignore: Tuple of markdown strings to ignore.
+        """
+        self.md_syntax = md_syntax
+        self.md_ignore = md_ignore
         try:
             self.cur_selection = self.text_area.selection_get()
-            if "**" in str(self.cur_selection):
-                self.unbold_selection = str(self.cur_selection).replace("**", "")
+            if len(self.md_syntax) == 2 and self.md_syntax[0] == "**" and self.md_syntax[1] == "__" and str(self.cur_selection)[1] != "*" and str(self.cur_selection)[1] != "_":
+                if str(self.cur_selection).startswith(self.md_syntax) == False and str(self.cur_selection).startswith(self.md_ignore) == False and str(self.cur_selection)[0] != "*" and str(self.cur_selection)[0] != "_":
+                    self.with_md_selection = f"{self.md_syntax[0]}{self.cur_selection}{self.md_syntax[0]}"
+                    self.text_area.delete(index1=SEL_FIRST, index2=SEL_LAST)
+                    self.text_area.insert(INSERT, self.with_md_selection)
+                    return
+                else:
+                    print("STEP 1: IGNORING ITALIC WHEN BOLD CLICKED")
+                    return
+            if str(self.cur_selection).startswith(self.md_syntax) == True and str(self.cur_selection).endswith(self.md_syntax) == True and str(self.cur_selection).startswith(self.md_ignore) == False:
+                print("STEP 2: REMOVING MARKDOWN")
+                self.without_md_selection = str(self.cur_selection).replace(self.md_syntax[0], "").replace(self.md_syntax[1], "")
                 self.text_area.delete(index1=SEL_FIRST, index2=SEL_LAST)
-                self.text_area.insert(INSERT, self.unbold_selection)
-            else:
-                self.bold_selection = f"**{self.cur_selection}**"
+                self.text_area.insert(INSERT, self.without_md_selection)
+                return
+            elif str(self.cur_selection).startswith(self.md_syntax) == True and str(self.cur_selection).startswith(self.md_ignore) == True:
+                print("STEP 3: IGNORING")
+                return
+            elif str(self.cur_selection).startswith(self.md_syntax) == True and str(self.cur_selection).startswith(self.md_ignore) == False:
+                print("STEP 4: REMOVING MARKDOWN")
+                self.without_md_selection = str(self.cur_selection).replace(self.md_syntax[0], "").replace(self.md_syntax[1], "")
                 self.text_area.delete(index1=SEL_FIRST, index2=SEL_LAST)
-                self.text_area.insert(INSERT, self.bold_selection)
+                self.text_area.insert(INSERT, self.without_md_selection)
+                return
+            elif str(self.cur_selection).startswith(self.md_syntax) == False and str(self.cur_selection).startswith(self.md_ignore) == False:
+                print("STEP 5: APPLYING MARKDOWN")
+                self.with_md_selection = f"{self.md_syntax[0]}{self.cur_selection}{self.md_syntax[0]}"
+                self.text_area.delete(index1=SEL_FIRST, index2=SEL_LAST)
+                self.text_area.insert(INSERT, self.with_md_selection)
+                return
         except:
-            # self.text_area.insert(INSERT, "****")
-            pass
-
-
-    def italic(self):
-        try:
-            self.cur_selection = self.text_area.selection_get()
-            if str(self.cur_selection).startswith(("*", "_")) == True and str(self.cur_selection).startswith(("**", "__")) == False:
-                self.unitalic_selection = str(self.cur_selection).replace("*", "").replace("_", "")
-                self.text_area.delete(index1=SEL_FIRST, index2=SEL_LAST)
-                self.text_area.insert(INSERT, self.unitalic_selection)
-            elif str(self.cur_selection).startswith(("*", "_")) == True and str(self.cur_selection).startswith(("**", "__")) == True:
-                pass
-            else:
-                self.italic_selection = f"*{self.cur_selection}*"
-                self.text_area.delete(index1=SEL_FIRST, index2=SEL_LAST)
-                self.text_area.insert(INSERT, self.italic_selection)
-        except:
-            # self.text_area.insert(INSERT, "****")
+            print("EXCEPTION")
             pass
 
 class Lexer(MarkdownLexer):
