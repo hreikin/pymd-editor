@@ -284,10 +284,12 @@ class EditorFrame(ttk.Frame):
     def italic(self):
         try:
             self.cur_selection = self.text_area.selection_get()
-            if "*" in str(self.cur_selection):
-                self.unitalic_selection = str(self.cur_selection).replace("*", "")
+            if str(self.cur_selection).startswith(("*", "_")) == True and str(self.cur_selection).startswith(("**", "__")) == False:
+                self.unitalic_selection = str(self.cur_selection).replace("*", "").replace("_", "")
                 self.text_area.delete(index1=SEL_FIRST, index2=SEL_LAST)
                 self.text_area.insert(INSERT, self.unitalic_selection)
+            elif str(self.cur_selection).startswith(("*", "_")) == True and str(self.cur_selection).startswith(("**", "__")) == True:
+                pass
             else:
                 self.italic_selection = f"*{self.cur_selection}*"
                 self.text_area.delete(index1=SEL_FIRST, index2=SEL_LAST)
