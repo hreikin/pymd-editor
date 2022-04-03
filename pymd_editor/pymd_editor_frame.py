@@ -296,31 +296,26 @@ class EditorFrame(ttk.Frame):
                     self.text_area.insert(INSERT, self.with_md_selection)
                     return
                 else:
-                    print("STEP 1: IGNORING ITALIC WHEN BOLD CLICKED")
                     return
             if str(self.cur_selection).startswith(self.md_syntax) == True and str(self.cur_selection).endswith(self.md_syntax) == True and str(self.cur_selection).startswith(self.md_ignore) == False:
-                print("STEP 2: REMOVING MARKDOWN")
                 self.without_md_selection = str(self.cur_selection).replace(self.md_syntax[0], "").replace(self.md_syntax[1], "")
                 self.text_area.delete(index1=SEL_FIRST, index2=SEL_LAST)
                 self.text_area.insert(INSERT, self.without_md_selection)
                 return
             elif str(self.cur_selection).startswith(self.md_syntax) == True and str(self.cur_selection).startswith(self.md_ignore) == True:
-                print("STEP 3: IGNORING")
                 return
             elif str(self.cur_selection).startswith(self.md_syntax) == True and str(self.cur_selection).startswith(self.md_ignore) == False:
-                print("STEP 4: REMOVING MARKDOWN")
                 self.without_md_selection = str(self.cur_selection).replace(self.md_syntax[0], "").replace(self.md_syntax[1], "")
                 self.text_area.delete(index1=SEL_FIRST, index2=SEL_LAST)
                 self.text_area.insert(INSERT, self.without_md_selection)
                 return
             elif str(self.cur_selection).startswith(self.md_syntax) == False and str(self.cur_selection).startswith(self.md_ignore) == False:
-                print("STEP 5: APPLYING MARKDOWN")
                 self.with_md_selection = f"{self.md_syntax[0]}{self.cur_selection}{self.md_syntax[0]}"
                 self.text_area.delete(index1=SEL_FIRST, index2=SEL_LAST)
                 self.text_area.insert(INSERT, self.with_md_selection)
                 return
         except:
-            print("EXCEPTION")
+            print("EXCEPTION: Application/removal of markdown formatting failed.")
             pass
 
 class Lexer(MarkdownLexer):
