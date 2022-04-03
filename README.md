@@ -162,7 +162,7 @@ python3 -m pymd_editor
 
 #### Embedded
 
-To use the `ttkbootstrap` styled `pymd_editor_frame` in one of your own python scripts:
+To use the `ttkbootstrap` styled `EditorFrame` in one of your own python scripts:
 
 ```python
 from pymd_editor.pymd_editor_frame import EditorFrame
