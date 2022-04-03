@@ -13,6 +13,7 @@ A standalone and embeddable Python based Markdown editor with HTML preview.
 
 ### Built With
 
+* [Pygments](https://github.com/pygments/pygments)
 * [Python](https://www.python.org/)
 * [Python Markdown](https://github.com/Python-Markdown/markdown)
 * [tkinter](https://docs.python.org/3/library/tkinter.html)
